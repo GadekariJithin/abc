@@ -14,10 +14,17 @@ public class SOService {
 		SODao soDao;
 		
 	public void save(SODetail soDetail) {
+		soDetail.setDay1(getdate(soDetail.getDay1()))
+		soDetail.setDay2(getdate(soDetail.getDay2()))
+			soDetail.setDay3(getdate(soDetail.getDay3()))
 			soDao.save(soDetail);
 		}
 		
-
+        public Date getdate(String dateinstring){
+		Date dateinDate=new SimpleDateFormat("dd/MM/yyyy").parse(dateinstring);
+		return dateinDate;
+	       }
+	
 		public MstrUser findByLoginId(String loginId) {
 			return soDao.findByLoginId(loginId);
 		}
