@@ -1,7 +1,32 @@
 package com.cts.soportal;
 
-import java.util.Date;
-
+import java.sql.Date;
+////   (
+//SO_Id int identity(1,1),
+//SO_Type char(3),
+//SO_Status char(3),
+//Practise_Id int,
+//SO_Priority int,
+//SO_Comment varchar(1000),
+//Last_working_date date,
+//Billing_Start_Date date,
+//Location_Type char(3),
+//City_Name varchar(50),
+//RIMS_ID varchar(50),
+//Tracking_No varchar(5),
+//Skill_Set varchar(50),
+//SO_Creation_date date,
+//Fulfillment_POC varchar(50),
+//LOB_Id int,
+//Practise_Area varchar(50),
+//Job_Level varchar(50),
+//Project_Type char(3),
+//Project_ID char(3),
+//DL_Mapping varchar(20),
+//EL_Mapping varchar(20),
+//Bill_Rate [decimal](16, 2) NULL
+//);
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,57 +39,87 @@ public class SODetail {
 	@Id
 	@GeneratedValue
 	private Integer id;
-
+	@Column(name = "SO_Type")
 	private String soType;
+	@Column(name = "SO_Status")
 	private String soStatus;
-	private String practise;
+	@Column(name = "Practise_Id")
+	private String practice;
+	@Column(name = "SO_Priority")
 	private String priority;
-	private int uniqueId;
-	private String soAgeing;
-	private Date soCreationDate;
-	private Date solastworkingDate;
+
+	/*private int uniqueId;
+
+	private String soAgeing;*/
+	@Column(name = "SO_Creation_date")
+	private Date day1;
+	@Column(name = "Last_working_date")
+	private Date day2;
+	@Column(name = "Location_Type")
 	private String location;
+	@Column(name = "City_Name")
 	private String city;
+	@Column(name = "RIMS_ID")
 	private String rims;
+	@Column(name = "Tracking_No")
 	private String tracking;
+	@Column(name = "Project_Type")
 	private String projectType;
+	@Column(name = "Project_ID")
 	private int projectId;
+	@Column(name = "Project_Name")
 	private String projectName;
+	@Column(name = "Job_Level")
 	private String jobLevel;
-	private String practiseArea;
+	@Column(name = "Practise_Area")
+	private String practiceArea;
+	@Column(name = "LOB_Id")
 	private String clientLob;
+	@Column(name = "Fulfillment_POC")
 	private String fulfillmentPoc;
+	@Column(name = "Skill_Set")
 	private String skills;
-	private Date billingDate;
+	@Column(name = "Billing_Start_Date")
+	private Date day3;
+
 	private String blmlsblUpside;
+
 	private int leadTime;
+
 	private int cp;
+
 	private int revenueLoss;
+
 	private int riskAmount;
-	private String dlMapping;
+	@Column(name = "DL_Mapping")
+	private String dLMapping;
+	@Column(name = "EL_Mapping")
 	private String elMapping;
+	@Column(name = "SO_Comment")
 	private String soComments;
+	@Column(name = "Bill_Rate")
+	private float billRate;
 
 	public SODetail() {
 
 	}
 
 	public SODetail(Integer id, String soType, String soStatus, String practise, String priority, int uniqueId,
-			String soAgeing, Date socreationDate, Date solastworkingDate, String location, String city, String rims,
+			String soAgeing, Date day1, Date day2, String location, String city, String rims,
 			String tracking, String projectType, int projectId, String projectName, String jobLevel,
-			String practiseArea, String clientLob, String fulfillmentPoc, String skills, Date billingDate,
-			String blmlsblUpside, int leadTime, int cp, int revenueLoss, int riskAmount, String dlMapping,
-			String elMapping, String soComments) {
+			String practiceArea, String clientLob, String fulfillmentPoc, String skills, Date day3,
+			String blmlsblUpside, int leadTime, int cp, int revenueLoss, int riskAmount, String dLMapping,
+			String elMapping, String soComments, float billRate) {
 		super();
 		this.id = id;
 		this.soType = soType;
 		this.soStatus = soStatus;
-		this.practise = practise;
+		this.practice = practice;
 		this.priority = priority;
-		this.uniqueId = uniqueId;
-		this.soAgeing = soAgeing;
-		this.soCreationDate = socreationDate;
-		this.solastworkingDate = solastworkingDate;
+		//this.uniqueId = uniqueId;
+		//this.soAgeing = soAgeing;
+		this.day1 = day1;
+		this.day2 = day2;
 		this.location = location;
 		this.city = city;
 		this.rims = rims;
@@ -73,19 +128,28 @@ public class SODetail {
 		this.projectId = projectId;
 		this.projectName = projectName;
 		this.jobLevel = jobLevel;
-		this.practiseArea = practiseArea;
+		this.practiceArea = practiceArea;
 		this.clientLob = clientLob;
 		this.fulfillmentPoc = fulfillmentPoc;
 		this.skills = skills;
-		this.billingDate = billingDate;
-		this.blmlsblUpside = blmlsblUpside;
-		this.leadTime = leadTime;
-		this.cp = cp;
-		this.revenueLoss = revenueLoss;
-		this.riskAmount = riskAmount;
-		this.dlMapping = dlMapping;
+		this.day3 = day3;
+		//this.blmlsblUpside = blmlsblUpside;
+	//	this.leadTime = leadTime;
+		//this.cp = cp;
+		//this.revenueLoss = revenueLoss;
+		//this.riskAmount = riskAmount;
+		this.dLMapping = dLMapping;
 		this.elMapping = elMapping;
 		this.soComments = soComments;
+		this.billRate = billRate;
+	}
+
+	public float getBillRate() {
+		return billRate;
+	}
+
+	public void setBillRate(float billRate) {
+		this.billRate = billRate;
 	}
 
 	public Integer getId() {
@@ -112,12 +176,12 @@ public class SODetail {
 		this.soStatus = soStatus;
 	}
 
-	public String getPractise() {
-		return practise;
+	public String getPractice() {
+		return practice;
 	}
 
-	public void setPractise(String practise) {
-		this.practise = practise;
+	public void setPractice(String practice) {
+		this.practice = practice;
 	}
 
 	public String getPriority() {
@@ -128,7 +192,7 @@ public class SODetail {
 		this.priority = priority;
 	}
 
-	public int getUniqueId() {
+	/*public int getUniqueId() {
 		return uniqueId;
 	}
 
@@ -142,22 +206,30 @@ public class SODetail {
 
 	public void setSoAgeing(String soAgeing) {
 		this.soAgeing = soAgeing;
+	}*/
+
+	
+
+	
+
+
+	
+
+	public Date getDay1() {
+		return day1;
 	}
 
-	public Date getSocreationDate() {
-		return soCreationDate;
+	public void setDay1(Date day1) {
+		this.day1 = day1;
 	}
 
-	public void setSocreationDate(Date socreationDate) {
-		this.soCreationDate = socreationDate;
+	
+	public Date getDay2() {
+		return day2;
 	}
 
-	public Date getSolastworkingDate() {
-		return solastworkingDate;
-	}
-
-	public void setSolastworkingDate(Date solastworkingDate) {
-		this.solastworkingDate = solastworkingDate;
+	public void setDay2(Date day2) {
+		this.day2 = day2;
 	}
 
 	public String getLocation() {
@@ -224,12 +296,12 @@ public class SODetail {
 		this.jobLevel = jobLevel;
 	}
 
-	public String getPractiseArea() {
-		return practiseArea;
+	public String practiceArea() {
+		return practiceArea;
 	}
 
-	public void setPractiseArea(String practiseArea) {
-		this.practiseArea = practiseArea;
+	public void setPractiseArea(String practiceArea) {
+		this.practiceArea = practiceArea;
 	}
 
 	public String getClientLob() {
@@ -256,12 +328,13 @@ public class SODetail {
 		this.skills = skills;
 	}
 
-	public Date getBillingDate() {
-		return billingDate;
+
+	public Date getDay3() {
+		return day3;
 	}
 
-	public void setBillingDate(Date billingDate) {
-		this.billingDate = billingDate;
+	public void setDay3(Date day3) {
+		this.day3 = day3;
 	}
 
 	public String getBlmlsblUpside() {
@@ -304,12 +377,13 @@ public class SODetail {
 		this.riskAmount = riskAmount;
 	}
 
-	public String getDlMapping() {
-		return dlMapping;
+	
+	public String getdLMapping() {
+		return dLMapping;
 	}
 
-	public void setDlMapping(String dlMapping) {
-		this.dlMapping = dlMapping;
+	public void setdLMapping(String dLMapping) {
+		this.dLMapping = dLMapping;
 	}
 
 	public String getElMapping() {
