@@ -58,6 +58,8 @@ public class SODao {
 		 * .setParameter("f", objUser.getDob()).executeUpdate();
 		 * em.getTransaction().commit();
 		 */
+		//String sDate1=soDetail.getDay3();  
+		//Date date3=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
 		Query query = em.createNativeQuery(
 				"INSERT INTO SO_DETAIL(SO_Type,SO_Status,Billing_Start_Date,Practise_Id,SO_Priority,SO_Comment,Last_working_date,Location_Type,City_Name,RIMS_ID,Tracking_No,Skill_Set,SO_Creation_date,Fulfillment_POC,LOB_Id,Practise_Area,Job_Level,Project_Type,Project_ID,DL_Mapping,EL_Mapping,Bill_Rate)"
 						+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -69,11 +71,11 @@ public class SODao {
 
 		query.setParameter(1, soDetail.getSoType());
 		query.setParameter(2, soDetail.getSoStatus());
-		query.setParameter(3, soDetail.getDay3());
+		query.setParameter(3, getdate(soDetail.getDay3()));
 		query.setParameter(4, soDetail.getPractice());
 		query.setParameter(5, soDetail.getPriority());
 		query.setParameter(6, soDetail.getsoComments());
-		query.setParameter(7, soDetail.getDay2());
+		query.setParameter(7, getdate(soDetail.getDay2()));
 		query.setParameter(8, soDetail.getLocation());
 		query.setParameter(9, soDetail.getCity());
 		query.setParameter(10, soDetail.getRims());
@@ -116,6 +118,12 @@ public class SODao {
 		// System.out.println(query.getResultList());
 	}
 
+	
+	public Date getdate(String dateinstring)
+	{
+		Date dateinDate=new SimpleDateFormat("dd/MM/yyyy").parse(dateinstring);
+		return dateinDate;
+	}
 	public List<SODetail> findBySOId() {
 		// TODO Auto-generated method stub
 		Query query = em.createNativeQuery(" SELECT * FROM SO_Detail", SODetail.class);
